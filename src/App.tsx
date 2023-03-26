@@ -4,7 +4,7 @@ import Accordion from "./Component/Accordion";
 function App() {
   return (
     <div className="App">
-     Hello, samurai! Let's go!cascs
+     Hello, samurai! Let's go!cascs dwsvsv
         <Accordion text={'Летим!!!'} />
     </div>
   );
