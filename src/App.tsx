@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
      Hello, samurai! Let's go!cascs dwsvsv
-        <Accordion text={'Летим!!!'} />
+        <Accordion text={'Летим!'} />
     </div>
   );
 }
