@@ -1,0 +1,39 @@
+
+.header {
+    grid-area: h;
+
+}
+
+.header_wrap {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    grid-template-rows: 60px 1fr;
+    background-color: slategrey;
+}
+
+.header_menu {
+    display: inline-flex;
+    margin: auto;
+    text-align: center;
+
+
+}
+
+.item {
+    margin: auto 40px;
+    border: 1px solid darkslategrey;
+    padding: 5px 20px 5px 20px;
+    background-color: darkkhaki;
+    border-radius: 10%;
+    cursor: default;
+}
+.item:hover{
+
+    border: 5px slategrey solid;
+    border-radius: 15%;
+    transition-delay: 0.1s;
+}
+.logo {
+    height: 60px;
+    width: 100px;
+}

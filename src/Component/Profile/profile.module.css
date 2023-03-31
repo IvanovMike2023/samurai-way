@@ -1,0 +1,24 @@
+
+.wrapper_content_img {
+    margin: auto;
+    display: block;
+    text-align: center;
+    padding-top: 60px;
+}
+
+.Content {
+    grid-area: c;
+    background-color: darkslategrey;
+}
+
+.Content img {
+    margin: auto;
+    text-align: center;
+    height: 400px;
+    width: 800px;
+}
+
+
+
+
+

@@ -1,0 +1,14 @@
+.wrapPost{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    margin-top: 20px;
+}
+.postphoto{
+    margin: auto;
+}
+.postphoto img{
+
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,27 @@
+
+
+.Sidebar {
+    grid-area: s;
+    display: grid;
+    background-color: burlywood;
+}
+.wrap_sidebar{
+    margin:  auto;
+    text-align: center;
+    font-size: 20px;
+}
+.wrap_sidebar:hover{
+    cursor: default;
+
+}
+.item{
+    margin-top: 10px;
+}
+.item:hover{
+    border-bottom: 3px slategrey solid;
+    transition-delay: 0.15s;
+}
+
+
+
+

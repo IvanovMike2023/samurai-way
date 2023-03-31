@@ -1,0 +1,11 @@
+.wrapMyPost{
+    margin: 60px 0 0 30px;
+}
+.wrapMyPost input{
+    margin: 10px 0 40px 10px;
+    height: 60px;
+}
+.wrapMyPost button{
+    margin-left: 10px;
+    width: 60px;
+}
