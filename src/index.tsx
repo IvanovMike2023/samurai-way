@@ -1,9 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import store from "./Redux/state";
+import ReactDOM from "react-dom";
+import App from "./App";
 
-ReactDOM.render(
-    <App />,
-  document.getElementById('root')
-);
+const rerender = () => {
+    ReactDOM.render(
+        <App store={store} />,
+        document.getElementById('root')
+    );
+}
+store.subscribe(rerender)
+rerender()
+
+
+
+
+
+
+
+
+
+

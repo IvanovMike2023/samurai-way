@@ -1,0 +1,5 @@
+.WrapperDialogs{
+    display: grid;
+
+    grid-template-columns: 5fr 7fr;
+}

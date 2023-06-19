@@ -1,22 +1,30 @@
-import React from "react";
+import React, {ChangeEvent, useState} from "react";
 import Post from "./Post/Post";
 import s from '.././MyPosts/MyPost.module.css'
-import {PostProps2} from './Post/Post'
-const MyPost=()=>{
-    const dataForPost:PostProps2={
-        message: [
-            {id: 1, text: "Hi my name is Mike"},
-            {id: 2, text: "Hi my name is Jon"},
-            {id: 3, text: "Hi my name is Alex"}
-        ]
+import {MessagesType} from "../../../Redux/state";
+
+type MessagesItemType={
+    message: MessagesType[]
+    newpostmessage:string
+    addMessage:()=>void
+    setnewMessage:(d:string)=>void
+}
+const MyPost=(props:MessagesItemType)=>{
+    const setnewMessageHandler=(e: ChangeEvent<HTMLInputElement>)=>{
+    props.setnewMessage(e.currentTarget.value)
     }
+const addMessageHandler=()=>{
+    props.addMessage()
+}
+
     return(<div>
         <div className={s.wrapMyPost}>
-            <input type="text"/>
-            <button>submit</button>
+            <input onChange={setnewMessageHandler} value={props.newpostmessage} type="text"/>
+            <button onClick={addMessageHandler}>submit</button>
         </div>
         <div>
-            <Post postsdata={dataForPost} />
+
+            <Post message={props.message} />
 
         </div>
     </div>)

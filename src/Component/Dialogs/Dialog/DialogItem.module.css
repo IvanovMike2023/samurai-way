@@ -1,0 +1,12 @@
+.dialogitem{
+
+    margin: 20px;
+}
+.WrapperDialog{
+
+    margin: 60px auto;
+    padding: 50px;
+}
+.WrapperDialog a{
+    text-decoration: none;
+}

@@ -6,7 +6,7 @@ type AccordionProps = {
 }
 const Header = () => {
     return (
-        <>
+        <div className={s.header}>
             <div className={s.header_wrap} >
                 <div>
                     <img className={s.logo} src={logo} alt=""/>
@@ -18,7 +18,7 @@ const Header = () => {
                     <div className={s.item}>Settings</div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 export default Header

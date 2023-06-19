@@ -1,44 +1,20 @@
 import React from "react";
 import postphotos from '../../../../img/1.jpg'
 import s from './post.module.css'
+import {MessagesType} from "../../../../Redux/state";
 
-type PostMass = {
-    id: number,
-    text: string
+type MessagesItemType = {
+    message: MessagesType[]
 }
-export type PostProps2 = {
-    message: PostMass[]
-}
-type PostProps = {
-    postsdata: PostProps2
-}
-const Post: React.FC<PostProps> = (props) => {
-    console.log(props.postsdata.message[0].text)
+const Post: React.FC<MessagesItemType> = (props) => {
     return (<div>
-        <div className={s.wrapPost}>
-            <div className={s.postphoto}>
-                <img src={postphotos} alt=""/>
+        {props.message.map((m) => <div key={m.id} className={s.wrapPost}>
+                <div className={s.postphoto}>
+                    <img src={postphotos}/>
+                </div>
+                <div><h3>{m.text}</h3></div>
             </div>
-            <div>
-                <h3>{props.postsdata.message[0].text}</h3>
-            </div>
-        </div>
-        <div className={s.wrapPost}>
-            <div className={s.postphoto}>
-                <img src={postphotos} alt=""/>
-            </div>
-            <div>
-                <h3>{props.postsdata.message[1].text}</h3>
-            </div>
-        </div>
-        <div className={s.wrapPost}>
-            <div className={s.postphoto}>
-                <img src={postphotos} alt=""/>
-            </div>
-            <div>
-                <h3>{props.postsdata.message[2].text}</h3>
-            </div>
-        </div>
+        )}
     </div>)
 }
 export default Post

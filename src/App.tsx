@@ -1,25 +1,31 @@
 import React from 'react';
 import s from './App.module.css'
-import Accordion from "./Component/Accordion";
 import Header from "./Component/Header/Header";
 import Sidebar from "./Component/Navbar/Sidebar";
 import Profile from "./Component/Profile/Profile";
-
-function App() {
+import {Dialogs} from "./Component/Dialogs/Dialogs";
+import {BrowserRouter, Route,Routes} from 'react-router-dom';
+import {ChangeMessageAC, StoreType} from "./Redux/state";
+type AppType={
+    store: StoreType
+}
+const App:React.FC<AppType>=(props)=> {
     return (
+        <BrowserRouter >
         <div className={s.App}>
             <div className={s.Wrapper_App}>
-                <div className={s.header}>
                     <Header/>
-                </div>
-                <div className={s.Sidebar}>
                     <Sidebar/>
-                </div>
-                <div className={s.Content}>
-                    <Profile/>
-                </div>
+                <Routes>
+                    <Route path="/profile" element={<Profile
+                        dispatch={props.store.dispatch.bind(props.store)}
+                        newmessage={props.store._state.profilePage.newmessage}
+                        profilePage={props.store._state.profilePage}/>} />
+                    <Route path="/dialogs" element={ <Dialogs dialogsPage={props.store._state.dialogsPage} />} />
+                </Routes>
             </div>
         </div>
+        </BrowserRouter>
     );
 }
 

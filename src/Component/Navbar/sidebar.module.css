@@ -3,10 +3,10 @@
 .Sidebar {
     grid-area: s;
     display: grid;
-    background-color: burlywood;
+    background-color: #1a4421;
 }
 .wrap_sidebar{
-    margin:  auto;
+    margin:  60px auto 10px;
     text-align: center;
     font-size: 20px;
 }
@@ -16,12 +16,24 @@
 }
 .item{
     margin-top: 10px;
+    color: white;
+
+}
+.active{
+    color: gold;
+}
+.item a{
+    margin-top: 10px;
+    text-decoration: none;
+
 }
 .item:hover{
     border-bottom: 3px slategrey solid;
     transition-delay: 0.15s;
 }
 
-
+.item:visited{
+    color: white;
+}
 
 
