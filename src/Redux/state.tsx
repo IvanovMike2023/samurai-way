@@ -2,6 +2,7 @@
 
 
 import {ProfileReducer} from "./profile-reducer";
+import {DialogReducer} from "./dialog-reducer";
 
 export type MessagesType = {
     id: number
@@ -15,9 +16,11 @@ export type ProfilePageType = {
 export type DialogItemType = {
     name: string
     id: number
+    dialogitem: string
 }
 export type DialogPageType = {
     dialogs: DialogItemType[]
+    dialogmessage:string
 }
 
 export type RootStateType = {
@@ -32,10 +35,17 @@ type TypeDispatchChange = {
     type: 'CHANGE-MESSAGE'
     newitem: string
 }
-export type ActionType=TypeDispatchChange | TypeDispatchAddMessage
+type TypeDispatchChangeDialog = {
+    type: 'CHANGE-DIALOG'
+    newdialogitem: string
+}
+type TypeDispatchAddDialog = {
+    type: 'ADD-DIALOG'
+    newdialogitem: string
+}
+export type ActionType=TypeDispatchChange | TypeDispatchAddMessage | TypeDispatchChangeDialog | TypeDispatchAddDialog
 export type StoreType = {
     _state: RootStateType
-
     _onChange: () => void
     subscribe: (observer: () => void) => void
     getState: () => void
@@ -44,12 +54,13 @@ export type StoreType = {
 const store: StoreType = {
     _state: {
         dialogsPage: {
+            dialogmessage: 'привет',
             dialogs: [
-                {name: 'Mike', id: 1},
-                {name: 'Alex', id: 2},
-                {name: 'Ivan', id: 3},
-                {name: 'Sem', id: 4},
-                {name: 'Dasha', id: 5}
+                {id: 1,name: 'Mike',dialogitem:'scsdcdsc'},
+                {id: 2,name: 'Alex',dialogitem:'scsdcdsc'},
+                {id: 3,name: 'Ivan',dialogitem:'scsdcdsc'},
+                {id: 4,name: 'Sem',dialogitem:'scsdcdsc'},
+                {id: 5,name: 'Dasha',dialogitem:'scsdcdsc'}
             ]
         },
         profilePage: {
@@ -73,6 +84,7 @@ const store: StoreType = {
     },
     dispatch(action){
         this._state.profilePage = ProfileReducer(this._state.profilePage,action)
+        this._state.dialogsPage = DialogReducer(this._state.dialogsPage,action)
         this._onChange()
     }
 }
@@ -88,5 +100,17 @@ export const AddMessageAC = (newmessage: string): TypeDispatchAddMessage => {
     return {
         type: 'ADD-MESSAGE',
         newmessage: newmessage
+    }as const
+}
+export const ChangeDialogAC=(newdialogitem:string):TypeDispatchChangeDialog=>{
+    return{
+        type: 'CHANGE-DIALOG',
+        newdialogitem: newdialogitem
+    }as const
+}
+export const AddDialogAC=(newdialogitem:string):TypeDispatchAddDialog=>{
+    return{
+        type: 'ADD-DIALOG',
+        newdialogitem: newdialogitem
     }as const
 }

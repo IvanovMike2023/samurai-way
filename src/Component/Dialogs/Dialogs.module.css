@@ -1,5 +1,22 @@
 .WrapperDialogs{
     display: grid;
+    background-color: dimgray;
+    justify-content: start;
+    grid-template-columns: auto;
+    align-content: start;
+    justify-items: left;
+    grid-template-areas:
+    " a b " ;
+}
 
-    grid-template-columns: 5fr 7fr;
+.dialog_item1{
+    grid-area: a;
+    display: grid;
+    justify-items: center;
+}
+.dialog_item2{
+    grid-area: b;
+    display: grid;
+    align-self: center;
+    justify-items: center;
 }

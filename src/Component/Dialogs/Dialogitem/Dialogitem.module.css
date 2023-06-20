@@ -1,0 +1,13 @@
+.WrapperDialogItem{
+    display: grid;
+    align-content: center;
+    justify-items: end;
+}
+.DialogInput{
+    width: 400px;
+    height: 150px;
+}
+
+.button_dialog{
+
+}
