@@ -5,11 +5,16 @@ import Sidebar from "./Component/Navbar/Sidebar";
 import Profile from "./Component/Profile/Profile";
 import {Dialogs} from "./Component/Dialogs/Dialogs";
 import {BrowserRouter, Route,Routes} from 'react-router-dom';
-import {ChangeMessageAC, StoreType} from "./Redux/state";
-type AppType={
-    store: StoreType
-}
-const App:React.FC<AppType>=(props)=> {
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "./Redux/store";
+import {ProfilePageType} from "./Redux/profile-reducer";
+import {DialogPageType} from "./Redux/dialog-reducer";
+
+const App=()=> {
+    const {message,newmessage} = useSelector<AppRootStateType,ProfilePageType>(state=>state.profile)
+    const {dialogs,dialogmessage} = useSelector<AppRootStateType,DialogPageType>(state=>state.dialogs)
+
+    const dispatch = useDispatch()
     return (
         <BrowserRouter >
         <div className={s.App}>
@@ -18,10 +23,9 @@ const App:React.FC<AppType>=(props)=> {
                     <Sidebar/>
                 <Routes>
                     <Route path="/profile" element={<Profile
-                        dispatch={props.store.dispatch.bind(props.store)}
-                        newmessage={props.store._state.profilePage.newmessage}
-                        profilePage={props.store._state.profilePage}/>} />
-                    <Route path="/dialogs" element={ <Dialogs dialogsPage={props.store._state.dialogsPage} dispatch={props.store.dispatch.bind(props.store)} />} />
+                        newmessage={newmessage}
+                        message={message}/>} />
+                    <Route path="/dialogs" element={ <Dialogs dialogs={dialogs} dialogmessage={dialogmessage} />} />
                 </Routes>
             </div>
         </div>

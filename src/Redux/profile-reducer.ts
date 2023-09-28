@@ -1,6 +1,30 @@
-import {ActionType, ProfilePageType, RootStateType} from "./state";
+export type ActionType=TypeDispatchChange | TypeDispatchAddMessage
 
-export const ProfileReducer=(state:ProfilePageType,action:ActionType):ProfilePageType=>{
+export type MessagesType = {
+    id: number
+    text: string
+}
+type TypeDispatchAddMessage = {
+    type: 'ADD-MESSAGE'
+    newmessage: string
+}
+type TypeDispatchChange = {
+    type: 'CHANGE-MESSAGE'
+    newitem: string
+}
+export type ProfilePageType = {
+    message: MessagesType[]
+    newmessage: string
+}
+let initialstate:ProfilePageType =     {
+    newmessage: 'vdsvsdv',
+        message: [
+        {id: 1, text: "Hi my name is Mike"},
+        {id: 2, text: "Hi my name is Jon"},
+        {id: 3, text: "Hi my name is Alex"}
+    ]
+}
+export const ProfileReducer=(state:ProfilePageType=initialstate,action:ActionType):ProfilePageType=>{
     switch (action.type){
         case 'CHANGE-MESSAGE':
             return {...state,
@@ -12,4 +36,16 @@ export const ProfileReducer=(state:ProfilePageType,action:ActionType):ProfilePag
         default: return state
     }
 
+}
+export const ChangeMessageAC = (newitem: string): TypeDispatchChange => {
+    return {
+        type: 'CHANGE-MESSAGE',
+        newitem: newitem
+    }as const
+}
+export const AddMessageAC = (newmessage: string): TypeDispatchAddMessage => {
+    return {
+        type: 'ADD-MESSAGE',
+        newmessage: newmessage
+    }as const
 }

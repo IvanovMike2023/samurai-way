@@ -1,17 +1,16 @@
 import React from 'react';
 import './index.css';
-import store from "./Redux/state";
 import ReactDOM from "react-dom";
 import App from "./App";
-
-const rerender = () => {
+import {Provider} from "react-redux";
+import {store} from "./Redux/store";
     ReactDOM.render(
-        <App store={store} />,
-        document.getElementById('root')
+        <Provider store={store}>
+        <App  />
+        </Provider>,document.getElementById('root') as HTMLElement
     );
-}
-store.subscribe(rerender)
-rerender()
+
+
 
 
 

@@ -1,20 +1,22 @@
 import React from "react";
 import s from './profile.module.css'
 import MyPost from "./MyPosts/MyPost";
-import {ActionType, AddMessageAC, ChangeMessageAC, ProfilePageType} from "../../Redux/state";
+import {AddMessageAC, ChangeMessageAC} from "../../Redux/state";
+import {MessagesType} from "../../Redux/profile-reducer";
+import {useDispatch} from "react-redux";
 
 type ProfilePropsType = {
-    profilePage: ProfilePageType
-    newmessage: string
-    dispatch: (action:ActionType)=>void
+    newmessage: string,
+    message: MessagesType[]
 }
 const Profile = (props: ProfilePropsType) => {
+    const dispatch = useDispatch()
     const addMessage = () => {
-        props.dispatch(AddMessageAC(props.newmessage))
-        props.dispatch(ChangeMessageAC(''))
+        dispatch(AddMessageAC(props.newmessage))
+        dispatch(ChangeMessageAC(''))
     }
     const setnewMessageHandler = (text: string) => {
-       props.dispatch(ChangeMessageAC(text))
+       dispatch(ChangeMessageAC(text))
     }
     return (
         <div className={s.Content}>
@@ -22,8 +24,8 @@ const Profile = (props: ProfilePropsType) => {
                 <img src="https://junat.schoolnet.by/files/00741/obj/120/14493/img/%D0%9B%D0%B5%D1%81.jpg" alt=""/>
             </div>
             <div>
-                <MyPost setnewMessage={setnewMessageHandler} addMessage={addMessage} message={props.profilePage.message}
-                        newpostmessage={props.profilePage.newmessage}/>
+                <MyPost setnewMessage={setnewMessageHandler} addMessage={addMessage} message={props.message}
+                        newpostmessage={props.newmessage}/>
             </div>
         </div>
     )

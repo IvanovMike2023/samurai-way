@@ -43,13 +43,11 @@ type TypeDispatchAddDialog = {
     type: 'ADD-DIALOG'
     newdialogitem: string
 }
-export type ActionType=TypeDispatchChange | TypeDispatchAddMessage | TypeDispatchChangeDialog | TypeDispatchAddDialog
 export type StoreType = {
     _state: RootStateType
     _onChange: () => void
     subscribe: (observer: () => void) => void
     getState: () => void
-    dispatch: (action: ActionType) => void
 }
 const store: StoreType = {
     _state: {
@@ -82,14 +80,9 @@ const store: StoreType = {
     getState() {
         return store._state
     },
-    dispatch(action){
-        this._state.profilePage = ProfileReducer(this._state.profilePage,action)
-        this._state.dialogsPage = DialogReducer(this._state.dialogsPage,action)
-        this._onChange()
-    }
+
 }
 
-export default store
 export const ChangeMessageAC = (newitem: string): TypeDispatchChange => {
     return {
         type: 'CHANGE-MESSAGE',

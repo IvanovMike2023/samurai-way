@@ -1,27 +1,30 @@
 import React from "react";
 import {DialogItemlist} from "./Dialoglist/DialogItemlist";
 import s from './Dialogs.module.css'
-import {ActionType, AddDialogAC, ChangeDialogAC, DialogPageType} from "../../Redux/state";
+import { AddDialogAC, ChangeDialogAC, DialogPageType} from "../../Redux/state";
 import {Dialogitem} from "./Dialogitem/Dialogitem";
+import {useDispatch} from "react-redux";
+import {DialogItemType} from "../../Redux/dialog-reducer";
 
 type DialogPropsType = {
-    dialogsPage: DialogPageType
-    dispatch:(action: ActionType)=>void
+    dialogmessage: string,
+    dialogs:DialogItemType[]
 }
 export const Dialogs = (props: DialogPropsType) => {
+   const dispatch = useDispatch()
     const onChangeDialog=(text:string)=>{
-        props.dispatch(ChangeDialogAC(text))
+        dispatch(ChangeDialogAC(text))
     }
     const addDialog=()=>{
-        props.dispatch(AddDialogAC(props.dialogsPage.dialogmessage))
+        dispatch(AddDialogAC(props.dialogmessage))
     }
     return <>
         <div className={s.WrapperDialogs}>
             <div className={s.dialog_item1}>
-                <DialogItemlist dialogs={props.dialogsPage.dialogs}/>
+                <DialogItemlist dialogs={props.dialogs}/>
             </div>
             <div className={s.dialog_item2}>
-                <Dialogitem dialogs={props.dialogsPage.dialogs} addDialog={addDialog} onChangeDialog={onChangeDialog} dialogmessage={props.dialogsPage.dialogmessage} />
+                <Dialogitem dialogs={props.dialogs} addDialog={addDialog} onChangeDialog={onChangeDialog} dialogmessage={props.dialogmessage} />
             </div>
         </div>
     </>
