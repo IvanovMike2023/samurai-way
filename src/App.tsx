@@ -9,7 +9,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./Redux/store";
 import {ProfilePageType} from "./Redux/profile-reducer";
 import {DialogPageType} from "./Redux/dialog-reducer";
-
 const App=()=> {
     const {message,newmessage} = useSelector<AppRootStateType,ProfilePageType>(state=>state.profile)
     const {dialogs,dialogmessage} = useSelector<AppRootStateType,DialogPageType>(state=>state.dialogs)
