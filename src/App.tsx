@@ -9,9 +9,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./Redux/store";
 import {ProfilePageType} from "./Redux/profile-reducer";
 import {DialogPageType} from "./Redux/dialog-reducer";
+import {UsersContainer} from "./Component/Users/UsersContainer";
 const App=()=> {
     const {message,newmessage} = useSelector<AppRootStateType,ProfilePageType>(state=>state.profile)
-    const {dialogs,dialogmessage} = useSelector<AppRootStateType,DialogPageType>(state=>state.dialogs)
 
     const dispatch = useDispatch()
     return (
@@ -24,7 +24,8 @@ const App=()=> {
                     <Route path="/profile" element={<Profile
                         newmessage={newmessage}
                         message={message}/>} />
-                    <Route path="/dialogs" element={ <Dialogs dialogs={dialogs} dialogmessage={dialogmessage} />} />
+                    <Route path="/dialogs" element={ <Dialogs  />} />
+                    <Route path="/users" element={ <UsersContainer  />} />
                 </Routes>
             </div>
         </div>

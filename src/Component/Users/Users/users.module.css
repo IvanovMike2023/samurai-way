@@ -1,0 +1,17 @@
+.users_wrapper{
+    display: grid;
+    grid-template-areas:
+    " a b " ;
+    border: black 2px solid;
+    border-radius: inherit;
+    margin: 10px;
+}
+.users_photo{
+grid-area: a;
+    display: grid;
+}
+.users_item{
+    grid-area: b;
+    display: grid;
+
+}

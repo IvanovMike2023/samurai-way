@@ -14,6 +14,10 @@ const SideBar = () => {
                     <NavLink to="/dialogs" className={({isActive}) => (isActive ? s.active : s.item)}>Dialogs
                     </NavLink>
                 </div>
+                <div className={s.item}>
+                    <NavLink to="/users" className={({isActive}) => (isActive ? s.active : s.item)}>Users
+                    </NavLink>
+                </div>
                 <div className={s.item}>Chat</div>
                 <div className={s.item}>Settings</div>
             </div>

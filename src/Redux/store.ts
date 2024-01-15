@@ -1,12 +1,14 @@
 import {ProfileReducer} from "./profile-reducer";
 import {DialogReducer} from "./dialog-reducer";
 import { combineReducers, createStore } from 'redux'
+import {UsersReducer} from "./users-reducer";
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
 const rootReducer = combineReducers({
     profile: ProfileReducer,
-    dialogs: DialogReducer
+    dialogs: DialogReducer,
+    users: UsersReducer
 })
 // непосредственно создаём store
 export const store = createStore(rootReducer)

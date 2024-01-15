@@ -1,30 +1,28 @@
 import React from "react";
 import {DialogItemlist} from "./Dialoglist/DialogItemlist";
 import s from './Dialogs.module.css'
-import { AddDialogAC, ChangeDialogAC, DialogPageType} from "../../Redux/state";
 import {Dialogitem} from "./Dialogitem/Dialogitem";
-import {useDispatch} from "react-redux";
-import {DialogItemType} from "../../Redux/dialog-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AddDialogAC, ChangeDialogAC, DialogItemType, DialogPageType} from "../../Redux/dialog-reducer";
+import {AppRootStateType} from "../../Redux/store";
 
-type DialogPropsType = {
-    dialogmessage: string,
-    dialogs:DialogItemType[]
-}
-export const Dialogs = (props: DialogPropsType) => {
-   const dispatch = useDispatch()
+export const Dialogs = () => {
+    const {dialogs,dialogmessage} = useSelector<AppRootStateType,DialogPageType>(state=>state.dialogs)
+    console.log(dialogs)
+    const dispatch = useDispatch()
     const onChangeDialog=(text:string)=>{
         dispatch(ChangeDialogAC(text))
     }
     const addDialog=()=>{
-        dispatch(AddDialogAC(props.dialogmessage))
+        dispatch(AddDialogAC(dialogmessage))
     }
     return <>
         <div className={s.WrapperDialogs}>
             <div className={s.dialog_item1}>
-                <DialogItemlist dialogs={props.dialogs}/>
+                <DialogItemlist dialogs={dialogs}/>
             </div>
             <div className={s.dialog_item2}>
-                <Dialogitem dialogs={props.dialogs} addDialog={addDialog} onChangeDialog={onChangeDialog} dialogmessage={props.dialogmessage} />
+                <Dialogitem dialogs={dialogs} addDialog={addDialog} onChangeDialog={onChangeDialog} dialogmessage={dialogmessage} />
             </div>
         </div>
     </>

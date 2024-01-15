@@ -16,7 +16,7 @@ const Profile = (props: ProfilePropsType) => {
         dispatch(ChangeMessageAC(''))
     }
     const setnewMessageHandler = (text: string) => {
-       dispatch(ChangeMessageAC(text))
+        dispatch(ChangeMessageAC(text))
     }
     return (
         <div className={s.Content}>
