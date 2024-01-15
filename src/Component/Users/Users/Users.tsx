@@ -14,9 +14,10 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                 </div>
                 </div>
                 <div className={s.users_item}>
-                    <span>{u.fullName}</span>
-                    <span>{u.fullName}</span>
-                    <span>{u.status}</span>
+                    <div>{u.fullName}</div>
+                    <div>{u.status}</div>
+                    <div>{u.location.city}</div>
+                    <div>{u.location.country}</div>
                 </div>
             </div>
         })}

@@ -19,16 +19,18 @@ export type UsersArray = {
     followed: boolean
     fullName: string
     status: string
-    location: string
+    location: LocationType
+}
+type LocationType={
+    city:string
+    country:string
 }
 export type UsersType = {
     users: UsersArray[]
 }
 let initialstate: UsersType = {
     users: [
-        {id: 1, followed: true, fullName: 'Mike', status: 'study', location: 'Minsk'},
-        {id: 2, followed: false, fullName: 'Igor', status: 'study', location: 'Minsk'},
-        {id: 3, followed: true, fullName: 'Egor', status: 'study', location: 'Minsk'}
+        {id: 1, followed: true, fullName: 'Mike', status: 'study', location: {city:'Minsk',country:'Russia'}}
     ]
 }
 export const UsersReducer = (state: UsersType = initialstate, action: ActionType): UsersType => {

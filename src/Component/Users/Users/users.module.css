@@ -1,17 +1,25 @@
-.users_wrapper{
+.users_wrapper {
     display: grid;
     grid-template-areas:
-    " a b " ;
+    " a a  b b b b b b b  ";
     border: black 2px solid;
     border-radius: inherit;
     margin: 10px;
+    margin-right: 20px;
 }
-.users_photo{
-grid-area: a;
+.users_photo {
+    grid-area: a;
     display: grid;
 }
-.users_item{
+
+.users_item {
+    background: dimgray;
     grid-area: b;
     display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-template-rows: 4fr 2fr;
+    justify-content: center;
+    justify-items: center;
+
 
 }
