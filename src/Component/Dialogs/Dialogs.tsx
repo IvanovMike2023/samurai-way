@@ -8,7 +8,6 @@ import {AppRootStateType} from "../../Redux/store";
 
 export const Dialogs = () => {
     const {dialogs,dialogmessage} = useSelector<AppRootStateType,DialogPageType>(state=>state.dialogs)
-    console.log(dialogs)
     const dispatch = useDispatch()
     const onChangeDialog=(text:string)=>{
         dispatch(ChangeDialogAC(text))

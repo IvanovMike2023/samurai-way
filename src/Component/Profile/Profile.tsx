@@ -1,8 +1,7 @@
 import React from "react";
 import s from './profile.module.css'
 import MyPost from "./MyPosts/MyPost";
-import {AddMessageAC, ChangeMessageAC} from "../../Redux/state";
-import {MessagesType} from "../../Redux/profile-reducer";
+import {AddMessageAC, ChangeMessageAC, MessagesType} from "../../Redux/profile-reducer";
 import {useDispatch} from "react-redux";
 
 type ProfilePropsType = {

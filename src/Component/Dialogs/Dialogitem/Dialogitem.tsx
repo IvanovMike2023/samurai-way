@@ -1,6 +1,6 @@
 import s from './Dialogitem.module.css'
 import React, {ChangeEvent} from "react";
-import {DialogItemType} from "../../../Redux/state";
+import {DialogItemType} from "../../../Redux/store";
 
 type DialogitemMessage = {
     dialogmessage: string

@@ -2,7 +2,29 @@ import {ProfileReducer} from "./profile-reducer";
 import {DialogReducer} from "./dialog-reducer";
 import { combineReducers, createStore } from 'redux'
 import {UsersReducer} from "./users-reducer";
+export type MessagesType = {
+    id: number
+    text: string
+}
 
+export type ProfilePageType = {
+    message: MessagesType[]
+    newmessage: string
+}
+export type DialogItemType = {
+    name: string
+    id: number
+    dialogitem: string
+}
+export type DialogPageType = {
+    dialogs: DialogItemType[]
+    dialogmessage:string
+}
+
+export type RootStateType = {
+    dialogsPage: DialogPageType
+    profilePage: ProfilePageType
+}
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
 const rootReducer = combineReducers({

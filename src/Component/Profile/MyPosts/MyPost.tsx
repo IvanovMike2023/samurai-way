@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from "react";
 import Post from "./Post/Post";
 import s from '.././MyPosts/MyPost.module.css'
-import {MessagesType} from "../../../Redux/state";
+import {MessagesType} from "../../../Redux/store";
 
 type MessagesItemType={
     message: MessagesType[]
