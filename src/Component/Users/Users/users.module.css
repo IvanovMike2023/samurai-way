@@ -1,25 +1,42 @@
 .users_wrapper {
     display: grid;
+    width: 50%;
     grid-template-areas:
-    " a a  b b b b b b b  ";
-    border: black 2px solid;
+    " a b b  ";
+    grid-template-columns: 2fr 7fr;
+    grid-template-rows: 120px;
     border-radius: inherit;
-    margin: 10px;
-    margin-right: 20px;
+    margin: 50px;
+
 }
-.users_photo {
-    grid-area: a;
+
+.users_img_wrapper {
     display: grid;
+    align-content: space-between;
+    justify-content: center;
+    justify-items: center;
+    grid-area: a;
+
 }
 
 .users_item {
-    background: dimgray;
+    border: dimgray 1px solid;
+    border-radius: 10px;
     grid-area: b;
     display: grid;
     grid-template-columns: 2fr 2fr;
     grid-template-rows: 4fr 2fr;
     justify-content: center;
     justify-items: center;
+}
 
+.users_img {
+    display: grid;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
 
+.users_buttons {
+    display: grid;
 }

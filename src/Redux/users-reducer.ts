@@ -1,3 +1,4 @@
+
 export type ActionType = DispatchFollow | DispatchUnFollow | DispatchSetUsers
 
 type DispatchFollow = {
@@ -15,42 +16,42 @@ type DispatchSetUsers = {
     users: UsersArray[]
 }
 export type UsersArray = {
-    id: number
-    followed: boolean
-    fullName: string
-    status: string
-    location: LocationType
+    "id": number
+    "name": string
+    "uniqueUrlName": null
+    "status": null
+    "photos": {
+        "small": null,
+        "large": null
+    }
+    followed:boolean
 }
-type LocationType={
-    city:string
-    country:string
-}
+
 export type UsersType = {
     users: UsersArray[]
 }
 let initialstate: UsersType = {
-    users: [
-        {id: 1, followed: true, fullName: 'Mike', status: 'study', location: {city:'Minsk',country:'Russia'}}
-    ]
+    users: []
+
 }
 export const UsersReducer = (state: UsersType = initialstate, action: ActionType): UsersType => {
     switch (action.type) {
         case'SETUSERS':
-            return state
-        case'FOLLOW':
-            return {...state,users:{...state.users.map((u)=>{
-                if(u.id===action.itemid){
-                    return {...u,followed:action.followed}
-                }
-                return u
-                    })} }
-        case'UNFOLLOW':
-            return {...state,users:{...state.users.map((u)=>{
-                if(u.id===action.itemid){
-                    return {...u,followed:action.followed}
-                }
-                return u
-                    })} }
+            return {users:action.users}
+        // case'FOLLOW':
+        //     return {...state,users:{...state.users.map((u)=>{
+        //         if(u.id===action.itemid){
+        //             return {...u,followed:action.followed}
+        //         }
+        //         return u
+        //             })} }
+        // case'UNFOLLOW':
+        //     return {...state,users:{...state.users.map((u)=>{
+        //         if(u.id===action.itemid){
+        //             return {...u,followed:action.followed}
+        //         }
+        //         return u
+        //             })} }
         default:
             return state
     }
