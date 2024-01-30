@@ -1,13 +1,22 @@
-import react from "react";
+import react, {ChangeEvent, MouseEventHandler} from "react";
 import {UsersArray, UsersType} from "../../../Redux/users-reducer";
 import s from '../Users/users.module.css'
 import photo from '../../../img/1.jpg'
 
 type UsersPropsType = {
     users: UsersArray[]
+    totalCount: number
+    currentpage: number
+    OnChange: (e:number)=>void
 }
 export const Users: React.FC<UsersPropsType> = (props) => {
+    let mas =[]
+
+    for(let i=1;i<=50;i++){
+        mas.push(i)
+    }
     return <div>
+        {mas.map(m=><span key={m} onClick={()=>props.OnChange(m)}>{m}</span>)}
         {props.users.map((u) => {
             return <div key={u.id} className={s.users_wrapper}>
                 <div className={s.users_img_wrapper}>

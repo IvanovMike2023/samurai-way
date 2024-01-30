@@ -32,12 +32,16 @@ export type UsersArray = {
 }
 
 export type UsersType = {
-    users: UsersArray[],
-    totalCount: any
+    users: UsersArray[]
+    totalCount: number
+    pagesize: number
+    currentpage:number
 }
 let initialstate: UsersType = {
     users: [],
-    totalCount: ''
+    totalCount: 20,
+    pagesize: 10,
+    currentpage:2
 
 }
 export const UsersReducer = (state: UsersType = initialstate, action: ActionType): UsersType => {
