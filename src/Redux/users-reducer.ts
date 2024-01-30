@@ -1,5 +1,5 @@
 
-export type ActionType = DispatchFollow | DispatchUnFollow | DispatchSetUsers
+export type ActionType = DispatchFollow | DispatchUnFollow | DispatchSetUsers | DispatchSetTotlaCount
 
 type DispatchFollow = {
     type: 'FOLLOW'
@@ -15,6 +15,10 @@ type DispatchSetUsers = {
     type:'SETUSERS'
     users: UsersArray[]
 }
+type DispatchSetTotlaCount = {
+    type:'SETTOTALCOUNT'
+    totalCount: number
+}
 export type UsersArray = {
     "id": number
     "name": string
@@ -28,16 +32,23 @@ export type UsersArray = {
 }
 
 export type UsersType = {
-    users: UsersArray[]
+    users: UsersArray[],
+    totalCount: any
 }
 let initialstate: UsersType = {
-    users: []
+    users: [],
+    totalCount: ''
 
 }
 export const UsersReducer = (state: UsersType = initialstate, action: ActionType): UsersType => {
+
     switch (action.type) {
         case'SETUSERS':
             return {...state,users:action.users}
+        case'SETTOTALCOUNT':
+            return {...state,
+                totalCount:action.totalCount
+            }
         // case'FOLLOW':
         //     return {...state,users:{...state.users.map((u)=>{
         //         if(u.id===action.itemid){
@@ -75,5 +86,12 @@ export const SetUsersAC = (newusers:UsersArray[] ): DispatchSetUsers => {
     return {
         type: 'SETUSERS',
         users: newusers
+    } as const
+}
+export const SetTotalCountAC = (totalCount:any ): DispatchSetTotlaCount => {
+
+    return {
+        type: 'SETTOTALCOUNT',
+        totalCount: totalCount
     } as const
 }
