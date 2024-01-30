@@ -26,7 +26,7 @@ export const Dialogitem: React.FC<DialogitemMessage> = (props) => {
                 <button onClick={addDialogHandler}>submit</button>
             </div>
             <div>
-                {props.dialogs.map(el => <div>{el.dialogitem} </div>)}
+                {props.dialogs.map(el => <div key={el.id}>{el.dialogitem} </div>)}
             </div>
 
 

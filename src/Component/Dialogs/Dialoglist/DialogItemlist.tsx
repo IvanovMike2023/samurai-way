@@ -10,9 +10,8 @@ type DialogItemPropsType = {
 export const DialogItemlist: React.FC<DialogItemPropsType> = (props) => {
     return <div className={s.WrapperDialog}>
 
-        {props.dialogs.map(el => <div className={s.dialogitem}><NavLink to={'/dialogs/' + el.id}>{el.name}</NavLink>
+        {props.dialogs.map(el => <div key={el.id} className={s.dialogitem}><NavLink to={'/dialogs/' + el.id}>{el.name}</NavLink>
         </div>)}
-
 
     </div>
 }

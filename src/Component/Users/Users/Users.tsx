@@ -7,29 +7,26 @@ type UsersPropsType = {
     users: UsersArray[]
     totalCount: number
     currentpage: number
-    OnChange: (e:number)=>void
+    OnChange: (e: number) => void
 }
 export const Users: React.FC<UsersPropsType> = (props) => {
-    let mas =[]
-
-    for(let i=1;i<=50;i++){
+    let mas = []
+    for (let i = 1; i <= 50; i++) {
         mas.push(i)
     }
     return <div>
-        {mas.map(m=><span key={m} onClick={()=>props.OnChange(m)}>{m}</span>)}
+        {mas.map(m => <span key={m} onClick={() => props.OnChange(m)}>{m}</span>)}
         {props.users.map((u) => {
             return <div key={u.id} className={s.users_wrapper}>
                 <div className={s.users_img_wrapper}>
-
-                        <div>
-                            <img className={s.users_img} src={photo} alt='cdcdcdcddc'/>
-                        </div>
-                        <div>
-                            {u.followed ?
-                                <button className={s.users_buttons}>Unfollow</button> :
-                                <button className={s.users_buttons}>Follow</button>}
-                        </div>
-
+                    <div>
+                        <img className={s.users_img} src={photo} alt='cdcdcdcddc'/>
+                    </div>
+                    <div>
+                        {u.followed ?
+                            <button className={s.users_buttons}>Unfollow</button> :
+                            <button className={s.users_buttons}>Follow</button>}
+                    </div>
                 </div>
                 <div className={s.users_item}>
                     <div>{u.name}</div>
