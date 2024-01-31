@@ -98,18 +98,32 @@
     //             fetch('It kamasutra').then(data => console.log(data))
     //         })
     //     })
-    fetch('mikrosoft').then(data => {
-        console.log(data)
-        return fetch('google')
-    })
-        .then(data => {
+    let makeRequest = () => {
+        fetch('mikrosoft').then(data => {
             console.log(data)
-            return fetch('It kamasutra')
+            return fetch('google')
         })
-        .then(data => console.log(data))
+            .then(data => {
+                console.log(data)
+                return fetch('It kamasutra')
+            })
+            .then(data => console.log(data))
+    }
+    let makeRequest2 = async () => {
+        let data = await fetch('mikrosoft')
+        console.log(data)
+        data = await fetch('google')
+        console.log(data)
+        data = await fetch('It kamasutra')
+        console.log(data)
+    }
+    //makeRequest2()
+    let makeRequestmulti = () => {
+        let promises = [fetch('mikrosoft'), fetch('google'), fetch('It kamasutra')]
+        Promise.all(promises).then(data => console.log(data))
+    }
+    makeRequestmulti()
     //fetch('mikrosoft').then(data => console.log(data))
     //fetch('It kamasutra').then(data => console.log(data))
-
-
 </script>
 </html>
