@@ -4,7 +4,6 @@ import {AppRootStateType} from "../../Redux/store";
 import {SetTotalCountAC, SetUsersAC, UsersArray, UsersType} from "../../Redux/users-reducer";
 import {Users} from "./Users/Users";
 import axios from "axios";
-import {log} from "util";
 
 export const UsersContainer = () => {
     const {users, totalCount, pagesize, currentpage} = useSelector<AppRootStateType, UsersType>(state => state.users)
@@ -46,9 +45,10 @@ export const UsersContainer = () => {
         })
 
     }
+
     return <div>
         <div>
         </div>
-        <Users  OnChange={OnChange} currentpage={currentpage} totalCount={totalCount} users={users}/>
+        <Users OnChange={OnChange} currentpage={currentpage} totalCount={totalCount} users={users}/>
     </div>
 }
