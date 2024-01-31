@@ -43,20 +43,72 @@
 <script>
     let axios = {
         get() {
-            let promise = new Promise((resolve, reject) => {
+            return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    resolve(342)
+                    resolve({
+                        g: 1,
+                        f: 2,
+                        message: 'cascsacsac'
+                    })
                 }, 3000)
             })
-            return promise
         }
     }
 
     let promise = axios.get()
-    promise.then((res) => console.log(res))
-    //.then(()=>console.log(1))
+    promise.then((res) => res.message)
+        .then((res) => console.log(res))
+    // .then((res) => console.log(res))
     //.then(()=>console.log(2))
     // console.log(promise)
+    let fetch = (url) => {
+        return new Promise((res, rej) => {
+            switch (url) {
+                case 'google': {
+                    setTimeout(() => {
+                        res({data: 'from google'})
+                    }, 2000)
+                    break
+                }
+                case 'mikrosoft': {
+                    setTimeout(() => {
+                        res({data: 'from mikrosoft'})
+                    }, 3000)
+                    break
+                }
+                case 'It kamasutra': {
+                    setTimeout(() => {
+                        res({data: 'from It kamasutra'})
+                    }, 500)
+                    break
+                }
+                default: {
+                    setTimeout(() => {
+                        res({data: 'Unknow'})
+                    }, 500)
+                }
+            }
+        })
+    }
+    // fetch('google')
+    //     .then(data => {
+    //         console.log(data)
+    //         fetch('mikrosoft').then(data => {
+    //             console.log(data)
+    //             fetch('It kamasutra').then(data => console.log(data))
+    //         })
+    //     })
+    fetch('mikrosoft').then(data => {
+        console.log(data)
+        return fetch('google')
+    })
+        .then(data => {
+            console.log(data)
+            return fetch('It kamasutra')
+        })
+        .then(data => console.log(data))
+    //fetch('mikrosoft').then(data => console.log(data))
+    //fetch('It kamasutra').then(data => console.log(data))
 
 
 </script>
