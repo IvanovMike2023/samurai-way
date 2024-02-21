@@ -19,6 +19,7 @@ type DispatchSetTotlaCount = {
     type:'SETTOTALCOUNT'
     totalCount: number
 }
+
 export type UsersArray = {
     "id": number
     "name": string
