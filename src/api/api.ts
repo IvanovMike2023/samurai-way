@@ -12,6 +12,9 @@ const instance = axios.create({withCredentials: true, baseURL: 'https://social-n
 export const usersAPI = {
     getUsers(){
         return instance.get<CreateTodoListType>('https://social-network.samuraijs.com/api/1.0/users')
+    },
+    onChangeUsers(pagasize:number,page:number){
+        return instance.get<CreateTodoListType>(`https://social-network.samuraijs.com/api/1.0/users?count=${pagasize}&page=${page}`)
     }
 
 }

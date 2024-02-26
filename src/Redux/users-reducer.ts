@@ -1,3 +1,5 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 export type ActionType = DispatchFollow | DispatchUnFollow | DispatchSetUsers | DispatchSetTotlaCount
 
@@ -100,3 +102,14 @@ export const SetTotalCountAC = (totalCount:any ): DispatchSetTotlaCount => {
         totalCount: totalCount
     } as const
 }
+export const SetUsersThunkCreator=()=>(dispatch:Dispatch)=>{
+
+    usersAPI.getUsers().then((res) => {
+            console.log(res.data.data)
+            dispatch(SetUsersAC(res.data.data.items))
+            //dispatch(SetTotalCountAC(totalCount))
+            console.log(res.data.data.items)
+        }
+    ).catch(er => console.log(er))
+}
+//SetUsersThunkCreator()

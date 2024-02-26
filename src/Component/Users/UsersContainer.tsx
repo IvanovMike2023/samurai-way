@@ -9,10 +9,10 @@ import {usersAPI} from "../../api/api";
 export const UsersContainer = () => {
     const {users, totalCount, pagesize, currentpage} = useSelector<AppRootStateType, UsersType>(state => state.users)
 
-    console.log(users)
+    //console.log(users)
     const dispatch = useDispatch()
-    useEffect(() => {
-    if (users.length === 0) {
+    //useEffect(() => {
+
         usersAPI.getUsers().then((res) => {
                 console.log(res.data.data)
                 dispatch(SetUsersAC(res.data.data.items))
@@ -20,17 +20,22 @@ export const UsersContainer = () => {
                 console.log(res.data.data.items)
             }
         ).catch(er => console.log(er))
-    }
-    },[users])
+
+    //},[users])
     const OnChange = (e: number) => {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${pagesize}&page=${e}`).then(res => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${pagesize}&page=${e}`)
+        //usersAPI.onChangeUsers(pagesize,e)
+            .then(res => {
+               // console.log(res.data.data)
             dispatch(SetUsersAC(res.data.items))
             dispatch(SetTotalCountAC(totalCount))
 
         })
 
     }
-
+    if (!users) {
+        return <div>aacdacas</div>
+    }
     return <div>
         <div>
         </div>
