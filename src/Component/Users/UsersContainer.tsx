@@ -1,27 +1,26 @@
 import react, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../Redux/store";
-import {SetTotalCountAC, SetUsersAC, UsersArray, UsersType} from "../../Redux/users-reducer";
+import {SetTotalCountAC, SetUsersAC, SetUsersThunkCreator, UsersArray, UsersType} from "../../Redux/users-reducer";
 import {Users} from "./Users/Users";
 import axios from "axios";
 import {usersAPI} from "../../api/api";
 
 export const UsersContainer = () => {
     const {users, totalCount, pagesize, currentpage} = useSelector<AppRootStateType, UsersType>(state => state.users)
-
+    const instance = axios.create({withCredentials: true, baseURL: 'https://social-network.samuraijs.com/api/1.0', headers: {
+            'API-KEY': '8f2534e2-22a4-4052-894e-a66c04807482'
+        }})
     //console.log(users)
     const dispatch = useDispatch()
-    //useEffect(() => {
+    useEffect(() => {
+        instance.get('users?count=5').then(res => {
+            dispatch(SetUsersAC(res.data.items))
+    dispatch(SetTotalCountAC(totalCount))
 
-        usersAPI.getUsers().then((res) => {
-                console.log(res.data.data)
-                dispatch(SetUsersAC(res.data.data.items))
-                dispatch(SetTotalCountAC(totalCount))
-                console.log(res.data.data.items)
-            }
-        ).catch(er => console.log(er))
+})
 
-    //},[users])
+    },[])
     const OnChange = (e: number) => {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${pagesize}&page=${e}`)
         //usersAPI.onChangeUsers(pagesize,e)
