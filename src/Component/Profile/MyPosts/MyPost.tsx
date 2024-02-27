@@ -5,7 +5,7 @@ import {MessagesType} from "../../../Redux/store";
 
 type MessagesItemType={
     message: MessagesType[]
-    newpostmessage:string
+    newmessage:string
     addMessage:()=>void
     setnewMessage:(d:string)=>void
 }
@@ -19,7 +19,7 @@ const addMessageHandler=()=>{
 
     return(<div>
         <div className={s.wrapMyPost}>
-            <input onChange={setnewMessageHandler} value={props.newpostmessage} type="text"/>
+            <input onChange={setnewMessageHandler} value={props.newmessage} type="text"/>
             <button onClick={addMessageHandler}>submit</button>
         </div>
         <div>

@@ -1,4 +1,4 @@
-import {ProfileReducer} from "./profile-reducer";
+import {ProfilePageType, ProfileReducer} from "./profile-reducer";
 import {DialogReducer} from "./dialog-reducer";
 import { combineReducers, createStore } from 'redux'
 import {UsersReducer} from "./users-reducer";
@@ -7,10 +7,7 @@ export type MessagesType = {
     text: string
 }
 
-export type ProfilePageType = {
-    message: MessagesType[]
-    newmessage: string
-}
+
 export type DialogItemType = {
     name: string
     id: number

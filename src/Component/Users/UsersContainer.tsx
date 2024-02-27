@@ -23,9 +23,7 @@ export const UsersContainer = () => {
     },[])
     const OnChange = (e: number) => {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${pagesize}&page=${e}`)
-        //usersAPI.onChangeUsers(pagesize,e)
             .then(res => {
-               // console.log(res.data.data)
             dispatch(SetUsersAC(res.data.items))
             dispatch(SetTotalCountAC(totalCount))
 

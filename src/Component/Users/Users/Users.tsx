@@ -2,6 +2,7 @@ import react, {ChangeEvent, MouseEventHandler} from "react";
 import {UsersArray, UsersType} from "../../../Redux/users-reducer";
 import s from '../Users/users.module.css'
 import photo from '../../../img/1.jpg'
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     users: UsersArray[]
@@ -17,10 +18,11 @@ export const Users: React.FC<UsersPropsType> = (props) => {
     return <div>
         {mas.map(m => <span key={m} onClick={() => props.OnChange(m)}>{m}</span>)}
         {props.users.map((u) => {
+
             return <div key={u.id} className={s.users_wrapper}>
                 <div className={s.users_img_wrapper}>
-                    <div>
-                        <img className={s.users_img} src={photo} alt='cdcdcdcddc'/>
+                    <div><NavLink to={'/profile/'+u.id}>{u.id} <img className={s.users_img} src={photo} alt='cdcdcdcddc'/>
+                    </NavLink>
                     </div>
                     <div>
                         {u.followed ?

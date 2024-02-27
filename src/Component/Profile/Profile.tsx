@@ -5,10 +5,12 @@ import {AddMessageAC, ChangeMessageAC, MessagesType} from "../../Redux/profile-r
 import {useDispatch} from "react-redux";
 
 type ProfilePropsType = {
-    newmessage: string,
+    fullName: string,
+    userId:number,
+    newmessage:string,
     message: MessagesType[]
 }
-const Profile = (props: ProfilePropsType) => {
+export const Profile = (props: ProfilePropsType) => {
     const dispatch = useDispatch()
     const addMessage = () => {
         dispatch(AddMessageAC(props.newmessage))
@@ -23,8 +25,10 @@ const Profile = (props: ProfilePropsType) => {
                 <img src="https://junat.schoolnet.by/files/00741/obj/120/14493/img/%D0%9B%D0%B5%D1%81.jpg" alt=""/>
             </div>
             <div>
-                <MyPost setnewMessage={setnewMessageHandler} addMessage={addMessage} message={props.message}
-                        newpostmessage={props.newmessage}/>
+                <div>{props.fullName}</div>
+                <div>{props.userId}</div>
+                <MyPost newmessage={props.newmessage}  message={props.message} setnewMessage={setnewMessageHandler} addMessage={addMessage}
+                      />
             </div>
         </div>
     )

@@ -4,7 +4,7 @@ import s from './post.module.css'
 import {MessagesType} from "../../../../Redux/store";
 
 type MessagesItemType = {
-    message: MessagesType[]
+message: MessagesType[]
 }
 const Post: React.FC<MessagesItemType> = (props) => {
     return (<div>
