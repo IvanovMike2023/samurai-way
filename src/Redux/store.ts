@@ -2,6 +2,7 @@ import {ProfilePageType, ProfileReducer} from "./profile-reducer";
 import {DialogReducer} from "./dialog-reducer";
 import { combineReducers, createStore } from 'redux'
 import {UsersReducer} from "./users-reducer";
+import {AuthReducer} from "./auth-reducer";
 export type MessagesType = {
     id: number
     text: string
@@ -27,7 +28,8 @@ export type RootStateType = {
 const rootReducer = combineReducers({
     profile: ProfileReducer,
     dialogs: DialogReducer,
-    users: UsersReducer
+    users: UsersReducer,
+    auth: AuthReducer
 })
 // непосредственно создаём store
 export const store = createStore(rootReducer)

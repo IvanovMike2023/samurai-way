@@ -1,0 +1,13 @@
+.container_loginPage{
+    display: grid;
+    margin: auto;
+    justify-content:center;
+    width: 25%;
+    align-items: center;
+    height: 100%;
+}
+.wrapper_loginPage{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 2fr 1fr 9fr;
+}

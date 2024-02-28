@@ -11,6 +11,8 @@ import {ProfilePageType} from "./Redux/profile-reducer";
 import {DialogPageType} from "./Redux/dialog-reducer";
 import {UsersContainer} from "./Component/Users/UsersContainer";
 import {ProfileContainer} from "./Component/Profile/ProfileContainer";
+import {HeaderContainer} from "./Component/Header/HeaderContainer";
+import {LoginPage} from "./Component/LoginPage/LoginPage";
 
 const App = () => {
     //const {message, newmessage} = useSelector<AppRootStateType, ProfilePageType>(state => state.profile)
@@ -20,12 +22,13 @@ const App = () => {
         <BrowserRouter>
             <div className={s.App}>
                 <div className={s.Wrapper_App}>
-                    <Header/>
+                    <HeaderContainer/>
                     <Sidebar/>
                     <Routes>
                         <Route path="/profile/:userId?" element={<ProfileContainer/>}/>
                         <Route path="/dialogs" element={<Dialogs/>}/>
                         <Route path="/users" element={<UsersContainer/>}/>
+                        <Route path="/login" element={<LoginPage/>}/>
                     </Routes>
                 </div>
             </div>
