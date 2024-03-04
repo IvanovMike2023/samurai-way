@@ -56,6 +56,7 @@ let initialstate: UsersType = {
 export const UsersReducer = (state: UsersType = initialstate, action: ActionType): UsersType => {
 
     switch (action.type) {
+
         case'SETUSERS':
             return {...state, users: action.users}
         case'SETTOTALCOUNT':
@@ -122,10 +123,10 @@ export const SetLoadingAC = (loading: boolean): DispatchSetLoading => {
 export const SetUsersThunkCreator = () => (dispatch: Dispatch) => {
 
     usersAPI.getUsers().then((res) => {
-            console.log(res.data.data)
-            dispatch(SetUsersAC(res.data.data.items))
+            //console.log(res.data.data)
+            dispatch(SetUsersAC(res.data.items))
             //dispatch(SetTotalCountAC(totalCount))
-            console.log(res.data.data.items)
+            //console.log(res.data.data.items)
         }
     ).catch(er => console.log(er))
 }

@@ -13,7 +13,7 @@ import {Users} from "./Users/Users";
 import axios from "axios";
 import {usersAPI} from "../../api/api";
 import {Preloader} from "../common/Preloader";
-import {debuglog} from "util";
+import {debuglog, log} from "util";
 
 export const UsersContainer = () => {
     const {
@@ -30,19 +30,25 @@ export const UsersContainer = () => {
     })
     const dispatch = useDispatch()
     useEffect(() => {
-        instance.get('users?count=5').then(res => {
+        //instance.get('users?count=5')
+          usersAPI.getUsers()
+            .then(res => {
+                //console.log(res)
             dispatch(SetLoadingAC(true))
-            dispatch(SetUsersAC(res.data.items))
+            dispatch(SetUsersAC(res.items))
             dispatch(SetTotalCountAC(totalCount))
             dispatch(SetLoadingAC(false))
 
-        })
+        }).catch(()=>{
+              console.log('sacasc')
+          })
 
     }, [])
 
     const OnChange = (e: number) => {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${pagesize}&page=${e}`)
+        usersAPI.onChangeUsers(pagesize,e)
             .then(res => {
+                console.log(res.data.items)
                 dispatch(SetLoadingAC(true))
                 dispatch(SetUsersAC(res.data.items))
                 dispatch(SetTotalCountAC(totalCount))

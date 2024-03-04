@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../Redux/store";
 import {ProfileDataType} from "../../Redux/profile-reducer";
 import {AuthType, setAuthAC} from "../../Redux/auth-reducer";
+import {authAPI} from "../../api/api";
 
 export const HeaderContainer =()=>{
     const {email,resultCode}=useSelector<AppRootStateType, AuthType>(state=> state.auth)
@@ -15,13 +16,11 @@ export const HeaderContainer =()=>{
         }
     })
     useEffect(()=>{
-        instance.get('auth/me').then((res)=>{
-            console.log(res.data.data.login)
+        authAPI.getMe().then((res)=>{
              dispatch(setAuthAC(res.data.data.login))
         })
     },[])
 
-    console.log(email)
     return <>
     <Header email={email} resultCode={resultCode} />
     </>
