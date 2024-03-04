@@ -1,7 +1,13 @@
 import {Dispatch} from "redux";
 import {usersAPI} from "../api/api";
 
-export type ActionType = DispatchFollow | DispatchUnFollow | DispatchSetUsers | DispatchSetTotlaCount |DispatchSetLoading
+export type ActionType =
+    DispatchFollow
+    | DispatchUnFollow
+    | DispatchSetUsers
+    | DispatchSetTotlaCount
+    | DispatchSetLoading
+    | DispatchSetCurrentpage
 
 type DispatchFollow = {
     type: 'FOLLOW'
@@ -18,8 +24,12 @@ type DispatchSetUsers = {
     users: UsersArray[]
 }
 type DispatchSetTotlaCount = {
-    type: 'SETTOTALCOUNT'
+    type: 'SET-TOTALCOUNT'
     totalCount: number
+}
+type DispatchSetCurrentpage = {
+    type: 'SET-CURRENTPAGE'
+    currentpage: number
 }
 type DispatchSetLoading = {
     type: 'SETLOADING'
@@ -59,30 +69,39 @@ export const UsersReducer = (state: UsersType = initialstate, action: ActionType
 
         case'SETUSERS':
             return {...state, users: action.users}
-        case'SETTOTALCOUNT':
+        case'SET-TOTALCOUNT':
             return {
                 ...state,
                 totalCount: action.totalCount
+            }
+        case'SET-CURRENTPAGE':
+            return {
+                ...state,
+                currentpage: action.currentpage
             }
         case 'SETLOADING':
             return {
                 ...state,
                 loading: action.loading
             }
-        // case'FOLLOW':
-        //     return {...state,users:{...state.users.map((u)=>{
-        //         if(u.id===action.itemid){
-        //             return {...u,followed:action.followed}
-        //         }
-        //         return u
-        //             })} }
-        // case'UNFOLLOW':
-        //     return {...state,users:{...state.users.map((u)=>{
-        //         if(u.id===action.itemid){
-        //             return {...u,followed:action.followed}
-        //         }
-        //         return u
-        //             })} }
+        case'FOLLOW':
+            return {
+                ...state, users: [...state.users.map((u) => {
+                    if (u.id === action.itemid) {
+                        return {...u, followed: action.followed}
+                    }
+                    return u
+                })]
+            }
+        case'UNFOLLOW':
+            return {
+                ...state, users: [...state.users.map((u) => {
+                    if (u.id === action.itemid) {
+                        return {...u, followed: action.followed}
+                    }
+                    return u
+                })]
+            }
         default:
             return state
     }
@@ -108,10 +127,16 @@ export const SetUsersAC = (newusers: UsersArray[]): DispatchSetUsers => {
         users: newusers
     } as const
 }
-export const SetTotalCountAC = (totalCount: any): DispatchSetTotlaCount => {
+export const SetTotalCountAC = (totalCount: number): DispatchSetTotlaCount => {
     return {
-        type: 'SETTOTALCOUNT',
+        type: 'SET-TOTALCOUNT',
         totalCount: totalCount
+    } as const
+}
+export const SetCurrentpageAC = (currentpage: number): DispatchSetCurrentpage => {
+    return {
+        type: 'SET-CURRENTPAGE',
+        currentpage: currentpage
     } as const
 }
 export const SetLoadingAC = (loading: boolean): DispatchSetLoading => {

@@ -40,3 +40,9 @@
 .users_buttons {
     display: grid;
 }
+.active{
+    background-color: red;
+}
+.more{
+    background-color: blue;
+}
