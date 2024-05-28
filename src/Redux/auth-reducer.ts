@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {authAPI, ProfileAPI, usersAPI} from "../api/api";
+import {setProfileAC} from "./profile-reducer";
 
 export type ActionType = DispatchSetAuth
 
@@ -34,4 +35,9 @@ export const setAuthAC = ( email:string): DispatchSetAuth => {
         type: 'SET-AUTH',
         email: email
     } as const
+}
+export const authTC=()=>(dispatch:Dispatch)=>{
+    authAPI.getMe().then((res)=>{
+        dispatch(setAuthAC(res.data.data.login))
+    })
 }
