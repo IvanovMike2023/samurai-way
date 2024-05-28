@@ -6,7 +6,6 @@ const instance = axios.create({
         'API-KEY': 'a2bc24bd-0a71-4fa5-ad1c-5b343082cdb6'
     }
 })
-
 export const usersAPI = {
     getUsers() {
         return instance.get('users?count=5').then(res => res.data)
@@ -20,9 +19,12 @@ export const usersAPI = {
     unfollowUser(id: number) {
         return instance.delete(`follow/${id}`)
     }
-
 }
-
+export const ProfileAPI={
+    getProfile(userIdmatch:number){
+        return  instance.get(`profile/` + userIdmatch)
+    }
+}
 export const authAPI = {
     getMe() {
         return instance.get('auth/me')

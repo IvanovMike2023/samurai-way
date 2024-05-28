@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {ProfileAPI} from "../api/api";
+
 export type ActionType = TypeDispatchChange | TypeDispatchAddMessage | TypeDispatchsetProfile
 
 export type MessagesType = {
@@ -97,4 +100,14 @@ export const setProfileAC = (payload: ProfileDataType): TypeDispatchsetProfile =
         type: 'SET-PROFILE',
         payload: payload
     } as const
+}
+export const setProfileTC=(userId:number,userIdmatch?:number)=>(dispatch:Dispatch)=>{
+    if(userIdmatch){
+        ProfileAPI.getProfile(userIdmatch).then((res) => {
+            dispatch(setProfileAC(res.data))
+        })
+    }
+    ProfileAPI.getProfile(userId).then((res) => {
+        dispatch(setProfileAC(res.data))
+})
 }

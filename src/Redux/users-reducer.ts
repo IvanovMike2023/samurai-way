@@ -36,7 +36,7 @@ type DispatchSetLoading = {
     type: 'SETLOADING'
     loading: boolean
 }
-type FollowingProgressType = ReturnType <typeof SetFollowingProgressAC>
+type FollowingProgressType = ReturnType<typeof SetFollowingProgressAC>
 export type UsersArray = {
     "id": number
     "name": string
@@ -108,8 +108,8 @@ export const UsersReducer = (state: UsersType = initialstate, action: ActionType
         case'SETFOLLOWPROGRESS':
             return {
                 ...state, followingProgress: action.blocked ?
-                    [...state.followingProgress,action.id] :
-                   [ ...state.followingProgress.filter(fl=>fl!=action.id)]
+                    [...state.followingProgress, action.id] :
+                    [...state.followingProgress.filter(fl => fl != action.id)]
             }
 
         default:
@@ -155,25 +155,46 @@ export const SetLoadingAC = (loading: boolean): DispatchSetLoading => {
         loading: loading
     } as const
 }
-export const SetFollowingProgressAC = (id:number,blocked: boolean) => {
+export const SetFollowingProgressAC = (id: number, blocked: boolean) => {
     return {
         type: 'SETFOLLOWPROGRESS',
         blocked,
         id
     } as const
 }
-export const getUsersThunkCreator=(totalCount:number)=>{
-    return (dispatch:Dispatch<ActionType>)=>{
-        usersAPI.getUsers()
-            .then(res => {
-                   dispatch(SetLoadingAC(true))
-                dispatch(SetUsersAC(res.items))
-
-                    dispatch(SetTotalCountAC(totalCount))
-                  dispatch(SetLoadingAC(false))
-
-            }).catch(() => {
-        })
-    }
+export const getUsersTC = (totalCount: number) => (dispatch: Dispatch<ActionType>) => {
+    usersAPI.getUsers()
+        .then(res => {
+            dispatch(SetLoadingAC(true))
+            dispatch(SetUsersAC(res.items))
+            dispatch(SetTotalCountAC(totalCount))
+            dispatch(SetLoadingAC(false))
+        }).catch(() => {
+    })
+}
+export const onChangeTC = (totalCount: number, pagesize: number, e: number) => (dispatch: Dispatch<ActionType>) => {
+    usersAPI.onChangeUsers(pagesize, e)
+        .then(res => {
+            dispatch(SetLoadingAC(true))
+            dispatch(SetCurrentpageAC(e))
+            dispatch(SetUsersAC(res.data.items))
+            dispatch(SetTotalCountAC(totalCount))
+            dispatch(SetLoadingAC(false))
+        }).catch(() => {
+    })
+}
+export const followTC = (id: number) => (dispatch: Dispatch<ActionType>) => {
+    dispatch(SetFollowingProgressAC(id, true))
+    usersAPI.followUser(id).then((res) => {
+        dispatch(followeAC(id, true))
+        dispatch(SetFollowingProgressAC(id, false))
+    })
+}
+export const unfollowTC = (id: number) => (dispatch: Dispatch<ActionType>) => {
+    dispatch(SetFollowingProgressAC(id, true))
+    usersAPI.unfollowUser(id).then((res) => {
+        dispatch(unfollowAC(id, false))
+        dispatch(SetFollowingProgressAC(id, false))
+    })
 }
 //SetUsersThunkCreator()

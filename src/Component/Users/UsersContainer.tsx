@@ -1,20 +1,9 @@
-import react, {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../Redux/store";
-import {
-    followeAC, SetCurrentpageAC, SetFollowingProgressAC,
-    SetLoadingAC,
-    SetTotalCountAC,
-    SetUsersAC,
-    getUsersThunkCreator, unfollowAC,
-    UsersArray,
-    UsersType
-} from "../../Redux/users-reducer";
+import {followTC, getUsersTC, onChangeTC, unfollowTC, UsersType} from "../../Redux/users-reducer";
 import {Users} from "./Users/Users";
-import axios from "axios";
-import {usersAPI} from "../../api/api";
 import {Preloader} from "../common/Preloader";
-import {debuglog, log} from "util";
 
 export const UsersContainer = () => {
     const {
@@ -27,37 +16,18 @@ export const UsersContainer = () => {
     } = useSelector<AppRootStateType, UsersType>(state => state.users)
     const dispatch = useDispatch()
     useEffect(() => {
-       dispatch(getUsersThunkCreator(totalCount))
+       dispatch(getUsersTC(totalCount))
     }, [])
 
     const OnChange = (e: number) => {
-        usersAPI.onChangeUsers(pagesize, e)
-            .then(res => {
-                dispatch(SetLoadingAC(true))
-                dispatch(SetUsersAC(res.data.items))
-                dispatch(SetTotalCountAC(totalCount))
-                dispatch(SetCurrentpageAC(e))
-                dispatch(SetLoadingAC(false))
-            })
-
-
+        dispatch(onChangeTC(totalCount,pagesize,e))
     }
 
     const follow = (id: number) => {
-
-        dispatch(SetFollowingProgressAC(id,true))
-        usersAPI.followUser(id).then((res) => {
-            dispatch(followeAC(id, true))
-            dispatch( SetFollowingProgressAC(id,false))
-        })
+        dispatch(followTC(id))
     }
     const unfollow = (id: number) => {
-        dispatch(SetFollowingProgressAC(id,true))
-        usersAPI.unfollowUser(id).then((res) => {
-            dispatch(unfollowAC(id, false))
-            dispatch(SetFollowingProgressAC(id,false))
-
-        })
+        dispatch(unfollowTC(id))
     }
     if (loading === true)
         return <Preloader/>
