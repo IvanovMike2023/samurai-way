@@ -6,7 +6,7 @@ import {
     SetLoadingAC,
     SetTotalCountAC,
     SetUsersAC,
-    SetUsersThunkCreator, unfollowAC,
+    getUsersThunkCreator, unfollowAC,
     UsersArray,
     UsersType
 } from "../../Redux/users-reducer";
@@ -25,19 +25,9 @@ export const UsersContainer = () => {
         loading,
         followingProgress
     } = useSelector<AppRootStateType, UsersType>(state => state.users)
-
     const dispatch = useDispatch()
     useEffect(() => {
-        usersAPI.getUsers()
-            .then(res => {
-                dispatch(SetLoadingAC(true))
-                dispatch(SetUsersAC(res.items))
-                dispatch(SetTotalCountAC(totalCount))
-                dispatch(SetLoadingAC(false))
-
-            }).catch(() => {
-        })
-
+       dispatch(getUsersThunkCreator(totalCount))
     }, [])
 
     const OnChange = (e: number) => {
@@ -58,7 +48,7 @@ export const UsersContainer = () => {
         dispatch(SetFollowingProgressAC(id,true))
         usersAPI.followUser(id).then((res) => {
             dispatch(followeAC(id, true))
-            dispatch(SetFollowingProgressAC(id,false))
+            dispatch( SetFollowingProgressAC(id,false))
         })
     }
     const unfollow = (id: number) => {

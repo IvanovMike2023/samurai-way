@@ -24,7 +24,6 @@ export const Users: React.FC<UsersPropsType> = (props) => {
         {mas.map(m => <span className={props.currentpage===m ? s.active : s.more} key={m} onClick={() => props.OnChange(m)}>{m}</span>)}
         {
             props.users.map((u) => {
-
             return <div key={u.id} className={s.users_wrapper}>
                 <div className={s.users_img_wrapper}>
                     <div><NavLink to={'/profile/'+u.id}>{u.id} <img className={s.users_img} src={photo} alt='cdcdcdcddc'/>

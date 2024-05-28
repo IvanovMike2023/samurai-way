@@ -1,14 +1,14 @@
 import {ProfilePageType, ProfileReducer} from "./profile-reducer";
 import {DialogReducer} from "./dialog-reducer";
-import { combineReducers, createStore } from 'redux'
+import {applyMiddleware, combineReducers, legacy_createStore} from 'redux'
 import {UsersReducer} from "./users-reducer";
 import {AuthReducer} from "./auth-reducer";
+import thunkMiddleware, {ThunkDispatch} from 'redux-thunk'
+
 export type MessagesType = {
     id: number
     text: string
 }
-
-
 export type DialogItemType = {
     name: string
     id: number
@@ -32,7 +32,7 @@ const rootReducer = combineReducers({
     auth: AuthReducer
 })
 // непосредственно создаём store
-export const store = createStore(rootReducer)
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleware));
 // определить автоматически тип всего объекта состояния
 export type AppRootStateType = ReturnType<typeof rootReducer>
 // а это, чтобы можно было в консоли браузера обращаться к store в любой момент

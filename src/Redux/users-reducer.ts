@@ -162,10 +162,18 @@ export const SetFollowingProgressAC = (id:number,blocked: boolean) => {
         id
     } as const
 }
-export const SetUsersThunkCreator = () => (dispatch: Dispatch) => {
-    usersAPI.getUsers().then((res) => {
-            dispatch(SetUsersAC(res.data.items))
-        }
-    ).catch(er => console.log(er))
+export const getUsersThunkCreator=(totalCount:number)=>{
+    return (dispatch:Dispatch<ActionType>)=>{
+        usersAPI.getUsers()
+            .then(res => {
+                   dispatch(SetLoadingAC(true))
+                dispatch(SetUsersAC(res.items))
+
+                    dispatch(SetTotalCountAC(totalCount))
+                  dispatch(SetLoadingAC(false))
+
+            }).catch(() => {
+        })
+    }
 }
 //SetUsersThunkCreator()
