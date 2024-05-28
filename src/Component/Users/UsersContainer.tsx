@@ -2,7 +2,7 @@ import react, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../Redux/store";
 import {
-    followeAC, SetCurrentpageAC,
+    followeAC, SetCurrentpageAC, SetFollowingProgressAC,
     SetLoadingAC,
     SetTotalCountAC,
     SetUsersAC,
@@ -22,7 +22,8 @@ export const UsersContainer = () => {
         totalCount,
         pagesize,
         currentpage,
-        loading
+        loading,
+        followingProgress
     } = useSelector<AppRootStateType, UsersType>(state => state.users)
 
     const dispatch = useDispatch()
@@ -35,13 +36,11 @@ export const UsersContainer = () => {
                 dispatch(SetLoadingAC(false))
 
             }).catch(() => {
-            console.log('sacasc')
         })
 
     }, [])
 
     const OnChange = (e: number) => {
-        console.log(e)
         usersAPI.onChangeUsers(pagesize, e)
             .then(res => {
                 dispatch(SetLoadingAC(true))
@@ -55,13 +54,19 @@ export const UsersContainer = () => {
     }
 
     const follow = (id: number) => {
+
+        dispatch(SetFollowingProgressAC(id,true))
         usersAPI.followUser(id).then((res) => {
             dispatch(followeAC(id, true))
+            dispatch(SetFollowingProgressAC(id,false))
         })
     }
     const unfollow = (id: number) => {
+        dispatch(SetFollowingProgressAC(id,true))
         usersAPI.unfollowUser(id).then((res) => {
             dispatch(unfollowAC(id, false))
+            dispatch(SetFollowingProgressAC(id,false))
+
         })
     }
     if (loading === true)
@@ -69,7 +74,7 @@ export const UsersContainer = () => {
     return <div>
         <div>
         </div>
-        <Users follow={follow} unfollow={unfollow} OnChange={OnChange} currentpage={currentpage} totalCount={totalCount}
+        <Users follow={follow} unfollow={unfollow} OnChange={OnChange} currentpage={currentpage} totalCount={totalCount} followingProgress={followingProgress}
                users={users}/>
     </div>
 }

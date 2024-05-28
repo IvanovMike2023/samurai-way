@@ -8,6 +8,7 @@ export type ActionType =
     | DispatchSetTotlaCount
     | DispatchSetLoading
     | DispatchSetCurrentpage
+    | FollowingProgressType
 
 type DispatchFollow = {
     type: 'FOLLOW'
@@ -35,7 +36,7 @@ type DispatchSetLoading = {
     type: 'SETLOADING'
     loading: boolean
 }
-
+type FollowingProgressType = ReturnType <typeof SetFollowingProgressAC>
 export type UsersArray = {
     "id": number
     "name": string
@@ -54,13 +55,15 @@ export type UsersType = {
     pagesize: number
     currentpage: number
     loading: boolean
+    followingProgress: number[]
 }
 let initialstate: UsersType = {
     users: [],
     totalCount: 20,
     pagesize: 10,
     currentpage: 2,
-    loading: true
+    loading: true,
+    followingProgress: []
 
 }
 export const UsersReducer = (state: UsersType = initialstate, action: ActionType): UsersType => {
@@ -102,6 +105,13 @@ export const UsersReducer = (state: UsersType = initialstate, action: ActionType
                     return u
                 })]
             }
+        case'SETFOLLOWPROGRESS':
+            return {
+                ...state, followingProgress: action.blocked ?
+                    [...state.followingProgress,action.id] :
+                   [ ...state.followingProgress.filter(fl=>fl!=action.id)]
+            }
+
         default:
             return state
     }
@@ -145,13 +155,16 @@ export const SetLoadingAC = (loading: boolean): DispatchSetLoading => {
         loading: loading
     } as const
 }
+export const SetFollowingProgressAC = (id:number,blocked: boolean) => {
+    return {
+        type: 'SETFOLLOWPROGRESS',
+        blocked,
+        id
+    } as const
+}
 export const SetUsersThunkCreator = () => (dispatch: Dispatch) => {
-
     usersAPI.getUsers().then((res) => {
-            //console.log(res.data.data)
             dispatch(SetUsersAC(res.data.items))
-            //dispatch(SetTotalCountAC(totalCount))
-            //console.log(res.data.data.items)
         }
     ).catch(er => console.log(er))
 }

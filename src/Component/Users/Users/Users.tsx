@@ -12,14 +12,15 @@ type UsersPropsType = {
     OnChange: (e: number) => void
     follow: (id:number) => void
     unfollow: (id:number) => void
+    followingProgress:number[]
 }
+
 export const Users: React.FC<UsersPropsType> = (props) => {
     let mas = []
     for (let i = 1; i <= 50; i++) {
         mas.push(i)
     }
     return <div>
-        {console.log(props.currentpage)}
         {mas.map(m => <span className={props.currentpage===m ? s.active : s.more} key={m} onClick={() => props.OnChange(m)}>{m}</span>)}
         {
             props.users.map((u) => {
@@ -31,8 +32,8 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                     </div>
                     <div>
                         {u.followed ?
-                            <button className={s.users_buttons} onClick={()=>props.unfollow(u.id)}>Отписаться </button> :
-                            <button className={s.users_buttons} onClick={()=>props.follow(u.id)}>Подписаться </button>}
+                            <button className={s.users_buttons} onClick={()=>props.unfollow(u.id)} disabled={props.followingProgress.some(el=>el===u.id)}>Отписаться </button> :
+                            <button className={s.users_buttons} onClick={()=>props.follow(u.id)} disabled={props.followingProgress.some(el=>el===u.id)}>Подписаться </button>}
                     </div>
                 </div>
                 <div className={s.users_item}>

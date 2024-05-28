@@ -3,7 +3,7 @@ import {UsersArray} from "../Redux/users-reducer";
 
 const instance = axios.create({
     withCredentials: true, baseURL: 'https://social-network.samuraijs.com/api/1.0', headers: {
-        'API-KEY': '8f2534e2-22a4-4052-894e-a66c04807482'
+        'API-KEY': 'a2bc24bd-0a71-4fa5-ad1c-5b343082cdb6'
     }
 })
 
