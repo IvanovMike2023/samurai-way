@@ -4,6 +4,7 @@ import {AppRootStateType} from "../../Redux/store";
 import {followTC, getUsersTC, onChangeTC, unfollowTC, UsersType} from "../../Redux/users-reducer";
 import {Users} from "./Users/Users";
 import {Preloader} from "../common/Preloader";
+import {LoginPage} from "../LoginPage/LoginPage";
 
 export const UsersContainer = () => {
     const {
@@ -14,6 +15,8 @@ export const UsersContainer = () => {
         loading,
         followingProgress
     } = useSelector<AppRootStateType, UsersType>(state => state.users)
+    const isauth = useSelector<AppRootStateType, boolean>(state => state.auth.isauth)
+
     const dispatch = useDispatch()
     useEffect(() => {
        dispatch(getUsersTC(totalCount))
@@ -31,10 +34,8 @@ export const UsersContainer = () => {
     }
     if (loading === true)
         return <Preloader/>
-    return <div>
-        <div>
-        </div>
+    return <>
         <Users follow={follow} unfollow={unfollow} OnChange={OnChange} currentpage={currentpage} totalCount={totalCount} followingProgress={followingProgress}
                users={users}/>
-    </div>
+    </>
 }

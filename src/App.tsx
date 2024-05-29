@@ -3,7 +3,7 @@ import s from './App.module.css'
 import Header from "./Component/Header/Header";
 import Sidebar from "./Component/Navbar/Sidebar";
 import Profile from "./Component/Profile/Profile";
-import {Dialogs} from "./Component/Dialogs/Dialogs";
+import {DialogContainer} from "./Component/Dialogs/DialogContainer";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./Redux/store";
@@ -26,7 +26,7 @@ const App = () => {
                     <Sidebar/>
                     <Routes>
                         <Route path="/profile/:userId?" element={<ProfileContainer/>}/>
-                        <Route path="/dialogs" element={<Dialogs/>}/>
+                        <Route path="/dialogs" element={<DialogContainer/>}/>
                         <Route path="/users" element={<UsersContainer/>}/>
                         <Route path="/login" element={<LoginPage/>}/>
                     </Routes>
