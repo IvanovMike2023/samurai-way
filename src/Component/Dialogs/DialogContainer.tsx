@@ -3,9 +3,10 @@ import {DialogItemlist} from "./Dialoglist/DialogItemlist";
 import s from './Dialogs.module.css'
 import {Dialogitem} from "./Dialogitem/Dialogitem";
 import {useDispatch, useSelector} from "react-redux";
-import {AddDialogAC, ChangeDialogAC, DialogItemType, DialogPageType} from "../../Redux/dialog-reducer";
+import {AddDialogAC, ChangeDialogAC, DialogPageType} from "../../Redux/dialog-reducer";
 import {AppRootStateType} from "../../Redux/store";
-import {LoginPage} from "../LoginPage/LoginPage";
+import {Navigate} from "react-router-dom";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 export const DialogContainer = () => {
     const {dialogs,dialogmessage} = useSelector<AppRootStateType,DialogPageType>(state=>state.dialogs)
@@ -18,8 +19,9 @@ export const DialogContainer = () => {
     const addDialog=()=>{
         dispatch(AddDialogAC(dialogmessage))
     }
+    if(!isauth) return <Navigate to={'/login'} />
+    //WithAuthRedirect(Dialogitem)
     return <>
-        {isauth ?
         <div className={s.WrapperDialogs}>
             <div className={s.dialog_item1}>
                 <DialogItemlist dialogs={dialogs}/>
@@ -28,6 +30,5 @@ export const DialogContainer = () => {
                 <Dialogitem dialogs={dialogs} addDialog={addDialog} onChangeDialog={onChangeDialog} dialogmessage={dialogmessage} />
             </div>
         </div>
-            : <LoginPage/>}
     </>
 }
